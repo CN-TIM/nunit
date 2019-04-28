@@ -258,7 +258,16 @@ namespace NUnit.Framework.Constraints
 
         private static void Delay(int delay)
         {
-            waitEvent.WaitOne(delay);
+            try
+            {
+                waitEvent.WaitOne(delay);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception in Delay:");
+                Console.WriteLine(ex);
+                throw;
+            }
         }
 
         private static void MethodSetsValues()
